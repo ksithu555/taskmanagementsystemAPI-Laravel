@@ -7,6 +7,7 @@ use App\Services\TaskService;
 use Illuminate\Http\JsonResponse;
 use App\Common\Routing\Controller;
 use App\Common\Exceptions\FatalErrorException;
+use GrahamCampbell\ResultType\Success;
 
 class TaskController extends Controller
 {
@@ -72,6 +73,11 @@ class TaskController extends Controller
 
         return $this->response($task->toArray());
     }
+    
+    public function multipleComplete(Request $request)
+    {
+        $this->taskService->multipleComplete(json_decode($request->ids));
+    }
 
     public function update(Request $request, $id)
     {
@@ -88,5 +94,10 @@ class TaskController extends Controller
         $task = $this->taskService->deleteTask($id);
 
         return $this->response([$task]);
+    }
+
+    public function multipleDelete(Request $request)
+    {
+        $response = $this->taskService->multipleDelete(json_decode($request->ids));
     }
 }

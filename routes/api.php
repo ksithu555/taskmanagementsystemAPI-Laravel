@@ -31,4 +31,7 @@ Route::group(['middleware' => ['auth:api']], function () {
     Route::get('completed-tasks',[ TaskController::class, 'completedTasks'])->name('completed.tasks');
     Route::get('incompleted-tasks',[ TaskController::class, 'incompletedTasks'])->name('incompleted.tasks');
     Route::put('tasks/update-status/{id}', [TaskController::class, 'checkComplete'])->name('check.complete');
-});
+    Route::post('tasks/multiple-delete', [TaskController::class, 'multipleDelete']);
+    Route::post('tasks/multiple-update', [TaskController::class, 'multipleComplete']);
+}
+);

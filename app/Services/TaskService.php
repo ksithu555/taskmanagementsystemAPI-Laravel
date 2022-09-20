@@ -20,12 +20,12 @@ class TaskService
 
     public function getCompletedTasks()
     {
-        return $this->taskRepository->all(['completed_status'=> 1]);
+        return $this->taskRepository->all(['completed_status' => 1]);
     }
 
     public function getIncompletedTasks()
     {
-        return $this->taskRepository->all(['completed_status'=> 0]);
+        return $this->taskRepository->all(['completed_status' => 0]);
     }
 
     public function createTask($request)
@@ -36,8 +36,8 @@ class TaskService
 
         $input['priority'] = $request['priority'];
 
+        //        $input['scheduled_date'] = $request['scheduled_date'];
         $input['scheduled_date']  = date("Y-m-d", strtotime($request['scheduled_date']));
-
 
         try {
 
@@ -46,30 +46,14 @@ class TaskService
             $task = $this->taskRepository->insert($input);
 
             DB::commit();
-
         } catch (Exception $exception) {
 
             DB::rollBack();
 
             throw new \App\Common\Exceptions\FatalErrorException($exception->getMessage());
-
         }
 
         return $task;
-    }
-
-    public function checkComplete($id)
-    {
-        $task = $this->taskRepository->getDataById($id);
-
-        $input['completed_status'] = 1;
-
-        $input['completed_date'] = Carbon::now()->toDateString();
-
-        $this->taskRepository->update($input, $id);
-
-        return $this->taskRepository->getDataById($id);
-
     }
 
     public function getTaskById($id)
@@ -84,12 +68,12 @@ class TaskService
             $input['title'] = $request->title;
         }
 
-        if(isset($request->priority)) {
+        if (isset($request->priority)) {
             $input['priority'] = $request->priority;
         }
 
-        if(isset($request->scheduled_date)) {
-            $input['scheduled_date'] = $request->scheduled_date;
+        if (isset($request->scheduled_date)) {
+            $input['scheduled_date']  = date("Y-m-d", strtotime($request['scheduled_date']));
         }
 
         try {
@@ -99,7 +83,6 @@ class TaskService
             $this->taskRepository->update($input, $id);
 
             DB::commit();
-
         } catch (Exception $exception) {
             DB::rollBack();
 
@@ -117,5 +100,48 @@ class TaskService
     public function getAllTasks()
     {
         return $this->taskRepository->all();
+    }
+
+    public function multipleComplete(array $ids)
+    {   
+        $input['completed_status'] = 1;
+
+        $input['completed_date'] = Carbon::now()->toDateString();
+
+        try {
+            foreach ($ids as $id) {
+                $task = $this->taskRepository->getDataById($id);
+
+                $this->taskRepository->update($input, $id);
+            }
+        } catch (Exception $exception) {
+            return false;
+        }
+        return true;
+    }
+
+    public function checkComplete($id)
+    {
+        $task = $this->taskRepository->getDataById($id);
+
+        $input['completed_status'] = 1;
+
+        $input['completed_date'] = Carbon::now()->toDateString();
+
+        $this->taskRepository->update($input, $id);
+
+        return $this->taskRepository->getDataById($id);
+    }
+
+    public function multipleDelete($ids)
+    {
+        try{
+            $this->taskRepository->destroyWithIds($ids);
+            
+        } catch(Exception $exception)
+        {
+            return false;
+        }
+        return true;
     }
 }
