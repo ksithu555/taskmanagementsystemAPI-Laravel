@@ -2,7 +2,7 @@
 
 This project was generated with [Laravel Framework]
 
-# Setting Envoriment
+# Setting Environment
 
 1.change .env like that
 ```
