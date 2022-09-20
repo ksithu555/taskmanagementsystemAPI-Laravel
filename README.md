@@ -1,9 +1,27 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# taskmanagementsystem
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+This project was generated with [Laravel Framework]
 
+# Setting Envoriment
+
+1.change .env like that
+```
+DB_CONNECTION= "your connection"
+DB_HOST= "your host"
+DB_PORT= "your port"
+DB_DATABASE= "your database"
+DB_USERNAME= "your database's user name"
+DB_PASSWORD= "your database's password"
+```
+
+2.type `composer install` at your command line
+
+3.type `php artisan migrate` at your command line
+
+4.type `php artisan serve` at your command line
+
+# Sample API call
+
+```
+[GET] http://127.0.0.1:8000/api/register
+```
