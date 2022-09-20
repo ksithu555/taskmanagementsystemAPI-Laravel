@@ -8,7 +8,8 @@ abstract class BaseRepository
 {
     public function all(array $options = [])
     {
-        return $this->optionsQuery($options)->get();    }
+        return $this->optionsQuery($options)->get();
+    }
 
     public function insert(array $data)
     {

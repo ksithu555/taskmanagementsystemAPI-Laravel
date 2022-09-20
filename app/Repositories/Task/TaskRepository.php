@@ -38,9 +38,9 @@ class TaskRepository implements TaskRepositoryInterface
         return $this->optionsQuery($options)->count();
     }
 
-    public function getDataById(int $id, array $relations = [])
+    public function getDataById(int $id)
     {
-        return $this->connection()->query()->with($relations)->where('id', $id)->first();
+        return $this->connection()->query()->where('id', $id)->first();
     }
 
     protected function optionsQuery(array $options)

@@ -36,7 +36,8 @@ class TaskService
 
         $input['priority'] = $request['priority'];
 
-        $input['scheduled_date'] = $request['scheduled_date'];
+        $input['scheduled_date']  = date("Y-m-d", strtotime($request['scheduled_date']));
+
 
         try {
 
