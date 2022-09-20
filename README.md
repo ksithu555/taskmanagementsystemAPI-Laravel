@@ -1,6 +1,6 @@
 # taskmanagementsystem
 
-This project was generated with [Laravel Framework]
+This project was generated with [Laravel](https://laravel.com/) version 9.30.1
 
 # Setting Environment
 
